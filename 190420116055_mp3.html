@@ -1,0 +1,105 @@
+<html>
+    <head>
+        <script>
+            var second=1,minute=0,hour=0,sec,min,h;
+        </script>
+
+        <style>
+            p{
+                font-weight: bold;
+                font-size: 25px;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                position: absolute;
+            }
+
+            div{
+                padding: 20 20 20 20;
+                font-size: 20px;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                position: absolute;
+            }
+        </style>
+    </head>
+
+    <body>
+        
+        <br><br><p id="abc">00 : 00 : 00</p><br>
+
+        <div>
+        <input type="button" value="Start" onclick="start()" id="mp4"> &nbsp;&nbsp;
+        <input type="button" value="Reset" onclick="reset()"> &nbsp;&nbsp;
+        <input type="button" value="Stop"  onclick="stop()" >
+        <br><br>
+        </div>
+
+        <script>
+            function start(){
+             v = setInterval(s,1000);
+             document.getElementById('mp4').disabled = true;
+            }
+
+        function s(){
+
+            if(hour<10)
+            {
+                h = "0"+hour;
+            }
+            else{
+                h = hour;
+            }
+
+            if(minute<10)
+            {
+                min = "0"+minute;
+            }
+            else{
+                min = minute;
+            }
+
+            if(second<10)
+            {
+                sec = "0"+second;
+            }
+            else{
+                sec = second;
+            }
+            
+            document.getElementById("abc").innerHTML = h +   " : " + min + " : " + sec ;
+            
+            second++;
+            
+            if(second==60)
+            {
+                second=0;
+                minute++;
+            }
+
+            if(minute==60)
+            {
+                minute=0;
+                hour++;
+            }
+
+        } 
+
+        function reset (){
+            clearTimeout(v);
+            hour = 0;
+            second = 1;
+            minute = 0;
+            document.getElementById("abc").innerHTML ="00 : 00 : 00";
+            document.getElementById('mp4').disabled = false;
+        }
+
+        function stop(){
+            clearTimeout(v);
+            document.getElementById('mp4').disabled = false;
+        }
+
+    </script>
+    </body>
+</html>
